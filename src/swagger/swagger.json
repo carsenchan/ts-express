@@ -1,0 +1,109 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"Vote": {
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double"
+				},
+				"tags": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"startDate": {
+					"type": "string"
+				},
+				"endDate": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"id",
+				"tags",
+				"startDate",
+				"endDate"
+			],
+			"type": "object"
+		}
+	},
+	"info": {
+		"title": "ts-express",
+		"version": "1.0.0",
+		"description": "Express API with Typescript",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"paths": {
+		"/Votes/{id}": {
+			"get": {
+				"operationId": "GetVote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Vote"
+						}
+					}
+				},
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"format": "double",
+						"type": "number"
+					}
+				]
+			}
+		},
+		"/Votes": {
+			"get": {
+				"operationId": "GetAllVote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Vote"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"tags": [
+		{
+			"name": "Votes",
+			"description": "Operation about votes"
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+  "swagger": {
+    "outputDirectory": "./src/swagger",
+    "entryFile": "./src/index.ts",
+    "tags": [
+      {
+        "name":"Votes",
+        "description": "Operation about votes"
+      }
+    ]
+  },
+  "routes": {
+    "entryFile": "./src/index.ts",
+    "routesDir": "./src/routers"
+  }
+}

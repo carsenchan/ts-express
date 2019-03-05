@@ -1,0 +1,10 @@
+# Node Lib
+node_modules/
+# Build Folder
+dist/
+# Only include environment-specific values
+.env
+# Log folder 
+logs/
+# Package error log
+yarn-error.log
