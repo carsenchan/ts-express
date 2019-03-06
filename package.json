@@ -6,8 +6,9 @@
   "scripts": {
     "server-dev": "nodemon",
     "server-clean": "rm -rf dist",
+    "server": "node dist/index.js",
     "server-build": "tsc",
-    "server-run": "concurrently \"npm run server-build && node dist/index.js\"",
+    "server-run": "concurrently \"yarn server-build && yarn server\"",
     "swagger": "node ./node_modules/tsoa/dist/cli.js swagger",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,10 +16,13 @@
   "license": "ISC",
   "dependencies": {
     "@types/dotenv": "^6.1.0",
+    "@types/mongodb": "^3.1.20",
+    "@types/mongoose": "^5.3.20",
     "@types/morgan": "^1.7.35",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "file-stream-rotator": "^0.4.1",
+    "mongoose": "^5.4.17",
     "morgan": "^1.9.1",
     "tsoa": "^2.3.8"
   },

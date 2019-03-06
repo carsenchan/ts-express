@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    container_name: docker-ts-mongo
+    restart: always
+    build: .
+    ports: 
+      - '5001:5001'
+    links:
+      - mongo
+  mongo:
+    container_name: mongoDB
+    image: mongo
+    command: mongod --noauth --smallfiles
+    ports:
+      - '27017:27017'

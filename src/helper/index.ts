@@ -1,43 +1,33 @@
-let fakeDB:Vote[] = [
-  {
-    id: 1,
-    tags:['global'],
-    startDate: '2010/09/01',
-    endDate: '2010/10/31'
-  },
-  {
-    id: 2,
-    tags: ['cooking', 'global'],
-    startDate: '2011/07/01',
-    endDate: '2011/08/31'
-  },
-  {
-    id: 3,
-    tags: ['local', 'hongkong', 'cooking'],
-    startDate: '2019/01/01',
-    endDate: '2019/02/28'
-  },
-];
-
-export interface Vote{  
-  id: number,
-  tags: string[],
-  startDate: string,
-  endDate: string
-}
+import {Vote, Campaign} from '../models/interfase';
+import Campaigns from '../models/campaigns';
+import Votes from '../models/Votes';
 
 
 const voteServices = {
-  get : (id:number): Promise<Vote> => new Promise<Vote>( (resolve, reject)=>{
-    setTimeout(()=>{
-      resolve(fakeDB[0]);
-    }, 2000);
-  }),
-  getAll: (): Promise<Vote[]> => new Promise<Vote[]>( (resolve, reject)=>{
-    setTimeout(()=>{
-      resolve(fakeDB);
-    }, 2000);
-  }),
+  get : (id:string): Promise<Campaign> =>{
+    return Campaigns.findOne({_id: id}).then((data:any)=>{
+      return data
+    });
+  },
+  getAll: (): Promise<Campaign[]> => {
+    return Campaigns.find().then((data:any)=>{
+      return data
+    });
+  },
+  createCampaign: (campaign: Campaign): Promise<Campaign> =>{
+    return Campaigns.create(campaign).then((data: any)=>{
+      const result:Campaign = data
+      return result;
+    })
+  },
+  createVoting: (campaignId: string, vote: Vote): Promise<Vote> =>{
+    const query = {hkId: vote.hkId, campaignId};
+    return Votes.findOneAndUpdate(query, {$set: vote}, {upsert: true, new: true})
+    .then( (data: any)=>{
+      const result:Vote = data;
+      return result;
+    })
+  }
 }
 
 
