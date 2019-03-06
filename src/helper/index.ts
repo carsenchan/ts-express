@@ -36,6 +36,12 @@ const services = {
           .then((data:any)=>{
             return data;
     })
+  },
+  removeCampaign: (campaignId:string) =>{
+    return Campaigns.findOneAndDelete({_id: campaignId})
+    .then((data:any)=>{
+      return data;
+    })
   }
 }
 

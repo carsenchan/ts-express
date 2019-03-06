@@ -1,4 +1,4 @@
-import {Get, Post, Route, Body, Query, Header, Path, SuccessResponse, Controller, Tags} from 'tsoa';
+import {Get, Post, Route, Body, Query, Header, Path, SuccessResponse, Controller, Tags, Delete} from 'tsoa';
 //import  from '../helper';
 
 import services from '../helper';
@@ -10,6 +10,15 @@ export class VotesController extends Controller {
   @Get('{campaignId}')
   public async getVote(campaignId: string): Promise<Campaign>{
     return await services.get(campaignId);
+  }
+
+  @Delete('{campaignId}')
+  /**
+   * Remove a specific campaign by ID
+   * @param  {string} campaignId Campaign ID
+   */
+  public async removeCampaign(campaignId: string): Promise<Campaign>{
+    return await services.removeCampaign(campaignId);
   }
 
   @Get()

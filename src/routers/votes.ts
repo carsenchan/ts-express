@@ -1,6 +1,7 @@
 import express from 'express';
 import * as myTypes from '../models/interfase';
 import {VotesController} from '../controllers/votesController';
+import { Controller } from 'tsoa';
 
 let router = express.Router();
 
@@ -17,6 +18,16 @@ router.get('/:id', (req, res, next)=>{
 router.get('/', (req, res, next)=>{
   const controller = new VotesController();
   controller.getAllVote()
+  .then(data=>{
+    res.json(data).end();
+  })
+  .catch(error=>res.json(error).end())
+});
+
+router.delete('/:id', (req, res, next)=>{
+  const id  = req.params.id;
+  const controller = new VotesController();
+  controller.removeCampaign(id)
   .then(data=>{
     res.json(data).end();
   })
