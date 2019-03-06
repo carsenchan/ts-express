@@ -1,0 +1,11 @@
+.all-list-item{
+  display: grid;
+  grid-template-columns: 55% 15% 15% 15%
+}
+
+.item-desc{
+  text-align: left
+}
+.list-header{
+  font-weight: bolder;
+}
