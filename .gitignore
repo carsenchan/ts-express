@@ -8,3 +8,5 @@ dist/
 logs/
 # Package error log
 yarn-error.log
+# Swagger Export Directry
+swagger/
