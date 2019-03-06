@@ -42,7 +42,18 @@ router.post('/:campaignId', (req, res, next)=>{
   controller.createVoting(campaignId, body)
   .then( result=>{
     res.status(201);
-    res.json(result);
+    res.json(result).end();
+  })
+  .catch(error=>res.json(error).end())
+});
+
+router.get('/summary/:campaignId', (req, res, next)=>{
+  const campaignId = req.params.campaignId;
+  const controller = new VotesController();
+  controller.getSummary(campaignId)
+  .then( result=>{
+    res.status(200);
+    res.json(result).end();
   })
   .catch(error=>res.json(error).end())
 });

@@ -13,8 +13,11 @@ export interface Campaign {
   campaignEndDate: Date,
   createDate?: Date
 }
-
 interface CampaignOption {
   id: number,
   optionDesc: string
+}
+export interface CompaignResult {
+  optionId: number,
+  count: number
 }

@@ -1,9 +1,9 @@
-import {Vote, Campaign} from '../models/interfase';
+import {Vote, Campaign, CompaignResult} from '../models/interfase';
 import Campaigns from '../models/campaigns';
 import Votes from '../models/Votes';
 
 
-const voteServices = {
+const services = {
   get : (id:string): Promise<Campaign> =>{
     return Campaigns.findOne({_id: id}).then((data:any)=>{
       return data
@@ -27,9 +27,18 @@ const voteServices = {
       const result:Vote = data;
       return result;
     })
+  },
+  getSummary: (campaignId: string): Promise<CompaignResult[]> =>{
+    return Votes.aggregate([
+            {$match: {campaignId: campaignId}},
+            {$group: {_id: "$campaignOptionId", count: {$sum: 1}}},
+            {$sort: {_id:1}}])
+          .then((data:any)=>{
+            return data;
+    })
   }
 }
 
 
 
-export default voteServices;
+export default services;
