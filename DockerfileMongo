@@ -1,0 +1,5 @@
+FROM mongo
+
+COPY dummy_data/. dummy_data/.
+# mongoimport --host mongo --db voting --collection votes --type json --file dummy_data/votes.json; 
+CMD mongoimport --host mongo --db voting --collection Campaigns --type json --file dummy_data/campaigns.json;

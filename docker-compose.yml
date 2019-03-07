@@ -1,7 +1,7 @@
 version: '3'
 services:
   server:
-    container_name: docker-ts-mongo
+    container_name: docker-ts-server
     restart: always
     build: .
     ports: 
@@ -11,9 +11,27 @@ services:
     environment:
       - PORT=6001
       - MONGO_URL=mongodb://mongo:27017/voting
+  client-web:
+    container_name: docker-ts-client
+    build: 
+      context: .
+      dockerfile: DockerfileClient
+    ports:
+      - '3000:3000'
+    restart: always
+    depends_on: 
+      - server
   mongo:
     container_name: mongoDB
     image: mongo
     command: mongod --noauth --smallfiles
     ports:
       - '27017:27017'
+  mongo-seed: 
+    image: mongo
+    build:
+      context: .
+      dockerfile: DockerfileMongo
+    links: 
+      - mongo
+    
