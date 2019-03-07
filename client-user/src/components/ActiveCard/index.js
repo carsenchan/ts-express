@@ -7,6 +7,7 @@ export default class ActiveCard extends Component {
 
   state={
     activeCampaign:{}
+
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -17,6 +18,7 @@ export default class ActiveCard extends Component {
     const {campaigns} = this.props;
     return (
       <div>
+        Active List
         { campaigns? campaigns.map(campaign=><SimpleCard key={campaign._id} campaign={campaign} onClick={this.props.updateDefault} defaultCampaign={this.props.defaultCampaign}/> ): <div/>}
       </div>
     )

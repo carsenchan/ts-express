@@ -15,7 +15,14 @@ class App extends Component {
     defaultCampaign: {}
   }
 
+  updateVotedList = (voted)=>{
+    let newVotedList: any[] = Object.assign([], this.state.votedCampaigns);
 
+    if(!newVotedList.includes(`${voted.campaignId}-${voted.campaignOptionId}`)){
+      newVotedList.push(`${voted.campaignId}-${voted.campaignOptionId}`);
+    }
+    this.setState({votedCampaigns: newVotedList});
+  }
 
   updateDefault = (campaign)=>{
     this.setState({defaultCampaign: campaign});
@@ -59,8 +66,8 @@ class App extends Component {
     const {votingCampaigns, activedCampaigns, endedCampaigns, votedCampaigns, defaultCampaign} = this.state;
     return (
       <div className="App">
-        <mCompo.TopArea defaultCampaign={defaultCampaign} activedCampaigns={activedCampaigns} updateDefault={this.updateDefault}/>
-        <mCompo.MostEnd />
+        <mCompo.TopArea defaultCampaign={defaultCampaign} activedCampaigns={activedCampaigns} updateDefault={this.updateDefault} updateVotedList={this.updateVotedList} votedCampaigns={votedCampaigns}/>
+        <mCompo.MostEnd campaigns={votingCampaigns}/>
         <mCompo.VotingList campaigns={votingCampaigns}/>
       </div>
     );

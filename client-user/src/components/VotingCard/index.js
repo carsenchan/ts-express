@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Modal, ModalHeader, 
+  ModalBody, ModalFooter, InputGroup, Input , InputGroupAddon, FormGroup, Label} from 'reactstrap';
 import moment from 'moment';
 import socketio from 'socket.io-client';
+import helpers from '../../helpers';
 
 const socketio_URL =  'http://localhost:6001/votes';
 const socket_EVENT = 'SUBSCRIBE';
@@ -10,12 +12,29 @@ export default class VotingCard extends Component {
 
   state ={
     socket:undefined,
-    summary: []
+    summary: [],
+    modal: false,
+    voteOption: {
+      campaignId: undefined, 
+      hkId: undefined,
+      campaignOptionId: undefined
+    },
+    idCharacter: '',
+    idMiddleNum: '',
+    idBracket: '',
   }
 
   componentDidMount(){
     //const socket = socketio(socketio_URL);
     this.initSocket();
+  }
+
+  toggle = ()=>{
+
+
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
   }
 
   initSocket = (prevCampainId)=>{
@@ -46,20 +65,25 @@ export default class VotingCard extends Component {
   }
 
   socketDataHandler = (data)=>{
+    //console.log(data);
     const d1 = Object.keys(data).map((key)=>data[key])
+
     if(d1.length>0){
       let newSummary = [];
-      d1.forEach((elem, index)=>{
-        const cId = elem._id.split('-')[0];
-        if(cId === this.props.campaign._id){
-          const optionId = elem._id.split('-')[1];
-          const count = elem.count;
-          newSummary.push({cId, optionId, count});
-        }
-          
-      });
-      console.log(newSummary);
-      this.setState({summary: newSummary});
+      if(d1[0]._id.split('-')[0] === this.props.campaign._id){
+        d1.forEach((elem, index)=>{
+          const cId = elem._id.split('-')[0];
+          if(cId === this.props.campaign._id){
+            const optionId = elem._id.split('-')[1];
+            const count = elem.count;
+            newSummary.push({cId, optionId, count});
+          }
+            
+        });
+        
+        this.setState({summary: newSummary});
+      }
+     
     }
   }
 
@@ -76,6 +100,7 @@ export default class VotingCard extends Component {
     console.log(summary);
   }
 
+
   componentDidUpdate(prevProps, prevState){
 
     if("_id" in this.props.campaign && (this.props.campaign._id !== prevProps.campaign._id)){
@@ -88,8 +113,59 @@ export default class VotingCard extends Component {
   }
 
   componentWillUnmount(){
-    console.log("I am Unmount")
+    
   }
+
+  // Update Redio Button Change
+  handleVoteRadio = (event)=>{
+    let newVoteOption = Object.assign({}, this.state.voteOption);
+    newVoteOption.campaignOptionId = `${event.target.value}`;
+    this.setState({voteOption: newVoteOption});
+  }
+
+  // Update HK ID Character Change
+  handleIdCharacterUpdate = (event)=>{
+    let newVoteOption = Object.assign({}, this.state.voteOption);
+    
+    let newChara = event.target.value;
+    
+    newVoteOption.hkId = `${newChara.toUpperCase()}${this.state.idMiddleNum}${this.state.idBracket}`;
+    this.setState({idCharacter: newChara, voteOption: newVoteOption });
+  }
+  
+  // Update HK ID Character Change
+  handleIdNumberUpdate = (event)=>{
+    let newVoteOption = Object.assign({}, this.state.voteOption);
+    
+    let newChara = event.target.value;
+    newVoteOption.hkId = `${this.state.idCharacter}${newChara}${this.state.idBracket}`;
+    this.setState({idMiddleNum: newChara, voteOption: newVoteOption });
+  }
+
+  handleBracketUpdate = (event)=>{
+    let newVoteOption = Object.assign({}, this.state.voteOption);
+    
+    let newChara = event.target.value;
+    newVoteOption.hkId = `${this.state.idCharacter}${this.state.idMiddleNum}${newChara.toUpperCase()}`;
+    this.setState({idBracket: newChara, voteOption: newVoteOption });
+  }
+
+  handleSubmitVote = (callback)=>()=>{
+    let newVoteOption = Object.assign({}, this.state.voteOption);
+    newVoteOption.campaignId = this.props.campaign._id;
+    if(!newVoteOption.hkId || !newVoteOption.campaignOptionId || !this.state.idCharacter || !this.state.idMiddleNum || !this.state.idBracket){
+      alert("Please select option and input your HKID number");
+      if(callback)callback();
+    } else {
+      helpers.createVoting(newVoteOption.campaignId, newVoteOption)
+      .then((data)=>{
+        alert("Thanks for your voting!")
+        if(callback)callback();
+      })
+      .catch(error=>console.log(error))
+    }
+  }
+
 
   render() {
     const {campaign} = this.props;
@@ -111,8 +187,28 @@ export default class VotingCard extends Component {
                     return(<li key={option.id}>{`${option.id}. ${option.optionDesc} Vote:${count}`}</li>)})
                }
              </ul>
-             <Button>Vote</Button>
+             <Button color="primary" onClick={this.toggle}>Vote</Button>
            </CardBody>
+            <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+              <ModalHeader toggle={this.toggle}>Vote</ModalHeader>
+              {
+                campaign.campaignOptions.map((option)=><RadioOption option={option} key={option.id} onChange={this.handleVoteRadio}/>)
+              }
+              <br/>
+
+              Input your Hong Kong ID number:
+              <InputGroup>
+                <InputGroupAddon addonType="prepend">e.g: 'R' or 'AB'</InputGroupAddon>
+                <Input placeholder="character" onChange={this.handleIdCharacterUpdate}/>
+                <InputGroupAddon addonType="prepend"># </InputGroupAddon>
+                <Input placeholder="number" onChange={this.handleIdNumberUpdate}/>
+                <InputGroupAddon addonType="prepend"># in bracket</InputGroupAddon>
+                <Input placeholder="bracket" onChange={this.handleBracketUpdate}/>
+              </InputGroup>
+              <ModalFooter>
+                <Button color="primary" onClick={ this.handleSubmitVote(this.toggle)}>Vote</Button>{' '}
+              </ModalFooter>
+            </Modal>
          </Card>:<div/>
         }
         
@@ -120,4 +216,16 @@ export default class VotingCard extends Component {
     
     )
   }
+}
+
+const RadioOption = (props)=>{
+
+  const {option, onChange} = props;
+  return (<FormGroup check>
+    <Label check>
+      <Input type="radio" name="radio1" value={option.id} onChange={onChange}/>
+      {`${option.id}. ${option.optionDesc}`}
+    </Label>
+  </FormGroup>
+  )
 }
