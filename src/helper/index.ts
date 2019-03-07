@@ -1,5 +1,5 @@
 import {Vote, Campaign, CompaignResult} from '../models/interfase';
-import Campaigns from '../models/campaigns';
+import Campaigns from '../models/Campaigns';
 import Votes from '../models/Votes';
 
 

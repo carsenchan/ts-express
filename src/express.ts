@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import fs from 'fs';
 import path from 'path';
+import cors from 'cors';
 
 const FileStreamRotator = require('file-stream-rotator');
 
@@ -13,6 +14,7 @@ import RouterRegister from './routers';
 dotenv.config();
 
 const app = express();
+
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -32,7 +34,13 @@ const logFormat = '[:date[iso]] :remote-addr :remote-user :method :url HTTP/:htt
 
 app.use(morgan(logFormat, {stream: accessLogStream}));
 
+
+// CORS
+app.use(cors());
+
 // Routes
 RouterRegister(app);
+
+
 
 export default app;
