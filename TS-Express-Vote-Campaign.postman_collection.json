@@ -1,0 +1,95 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TS-Express-Vote-Campaign",
+		"_postman_id": "8a0c60bd-fb84-aeb6-dc26-5d9652eee4a1",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all Votes",
+			"request": {
+				"url": "localhost:6001/votes",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Voting Campaign",
+			"request": {
+				"url": "localhost:6001/votes",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"campaignDesc\": \"2019, What progamming langugae gets the most value?\",\n\t\"campaignOptions\": [\n\t{\n\t\t\"id\": 1,\n\t\t\"optionDesc\": \"Node.js\"\n\t},\n\t{\n\t\t\"id\": 2,\n\t\t\"optionDesc\": \"GoLang\"\n\t},\n\t{\n\t\t\"id\": 3,\n\t\t\"optionDesc\": \"Rust\"\n\t},\n\t{\n\t\t\"id\": 4,\n\t\t\"optionDesc\": \"PHP\"\n\t},\n\t{\n\t\t\"id\": 5,\n\t\t\"optionDesc\": \"DART\"\n\t}\n],\n\t\"campaignStartDate\": \"2019/03/01 00:00:00\",\n\t\"campaignEndDate\": \"2019/03/31 23:59:59\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Voting Campaign by ID",
+			"request": {
+				"url": "localhost:6001/votes/5c80006946b0512d70faed90",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Make a Vote",
+			"request": {
+				"url": "localhost:6001/votes/5c7fcc7c8bb0f61ac0c63917",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"hkId\": \"agfg a2 \",\n  \"campaignId\": \"5c7fcc7c8bb0f61ac0c63917\",\n  \"campaignOptionId\": 1\n}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get Voting Campaign Summary by Specific ID",
+			"request": {
+				"url": "localhost:6001/votes/summary/5c7fb49c4162611c2093e0c3",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Voting Campaign by Speicfic Campaign  ID",
+			"request": {
+				"url": "localhost:6001/votes/5c80006946b0512d70faed90",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

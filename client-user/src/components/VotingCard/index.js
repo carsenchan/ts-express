@@ -4,6 +4,7 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Modal, Modal
 import moment from 'moment';
 import socketio from 'socket.io-client';
 import helpers from '../../helpers';
+import idValidator from './IDInput';
 
 const socketio_URL =  'http://localhost:6001/votes';
 const socket_EVENT = 'SUBSCRIBE';
@@ -157,12 +158,17 @@ export default class VotingCard extends Component {
       alert("Please select option and input your HKID number");
       if(callback)callback();
     } else {
-      helpers.createVoting(newVoteOption.campaignId, newVoteOption)
-      .then((data)=>{
-        alert("Thanks for your voting!")
+      if(idValidator(newVoteOption.hkId)) {
+        helpers.createVoting(newVoteOption.campaignId, newVoteOption)
+        .then((data)=>{
+          alert("Thanks for your voting!")
+          if(callback)callback();
+        })
+        .catch(error=>console.log(error))
+      } else {
+        alert("Your ID Number is not valid, voting will NOT be submitted!");
         if(callback)callback();
-      })
-      .catch(error=>console.log(error))
+      }
     }
   }
 
