@@ -12,10 +12,10 @@
     "server-run": "concurrently \"yarn server-build && yarn server\"",
     "client-install": "npm install --prefix client-user",
     "client-build": "npm run build --prefix client-user",
-    "client-run": "",
+    "client-run": "cd client-user && serve -s build",
     "app-install": "concurrently \"yarn server-install && yarn client-install\" ",
     "app-build": "concurrently \"yarn server-build && yarn client-build\"",
-    "app-run": "concurrently \"yarn server-run && yarn client-build\"",
+    "app-run": "concurrently \"yarn server-run && yarn client-run\"",
     "swagger": "node ./node_modules/tsoa/dist/cli.js swagger",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
