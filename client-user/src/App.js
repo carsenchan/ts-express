@@ -15,6 +15,12 @@ class App extends Component {
     defaultCampaign: {}
   }
 
+
+
+  updateDefault = (campaign)=>{
+    this.setState({defaultCampaign: campaign});
+  }
+
   componentDidMount(){
     helper.getAllCampaign()
     .then(data=>{return data.data})
@@ -39,7 +45,6 @@ class App extends Component {
             defaultCamp = campaign;
             
           }
-          console.log(defaultCamp)
         });
 
 
@@ -54,7 +59,7 @@ class App extends Component {
     const {votingCampaigns, activedCampaigns, endedCampaigns, votedCampaigns, defaultCampaign} = this.state;
     return (
       <div className="App">
-        <mCompo.TopArea defaultCampaign={defaultCampaign} activedCampaigns={activedCampaigns}/>
+        <mCompo.TopArea defaultCampaign={defaultCampaign} activedCampaigns={activedCampaigns} updateDefault={this.updateDefault}/>
         <mCompo.MostEnd />
         <mCompo.VotingList campaigns={votingCampaigns}/>
       </div>

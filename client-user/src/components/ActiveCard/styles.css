@@ -1,0 +1,22 @@
+.item-active{
+  background-color: lightsalmon;
+}
+
+.simple-active-item{
+  margin: 5px;
+  cursor: pointer;
+}
+
+.simple-card-desc{
+  font-weight: bolder;
+}
+
+.simple-card-startdate{
+  font-size: 0.8rem;
+  color:gray;
+}
+
+.simple-card-enddate{
+  font-size: 0.8rem;
+  color:gray;
+}

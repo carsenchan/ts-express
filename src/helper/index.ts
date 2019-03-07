@@ -30,9 +30,9 @@ const services = {
   },
   getSummary: (campaignId: string): Promise<CompaignResult[]> =>{
     return Votes.aggregate([
-            {$match: {campaignId: campaignId}},
-            {$group: {_id: "$campaignOptionId", count: {$sum: 1}}},
-            {$sort: {_id:1}}])
+              {$match: {campaignId: campaignId}},
+              {$group: {_id: {$concat: ["$campaignId", "-", {$toString: "$campaignOptionId"}]}, count: {$sum: 1}}},
+              {$sort: {_id:1}}])
           .then((data:any)=>{
             return data;
     })
