@@ -19,8 +19,8 @@ $ cd client-user && yarn
 
 ### 2) MongoDB Data import
 1. User shall install mongoDB localhost and creat a database named 'voting'
-2. Create a collection called 'Campaigns' and import data by file 'campaigns.json' in email
-3. Create a collection called 'votes' and import data by file 'votes.json' in email
+2. Create a collection called 'Campaigns' and import data by file 'campaigns.json' in `/dummy_data` folder
+3. Create a collection called 'votes' and import data by file 'votes.json' in `/dummy_data` folder
 
 ### 3) Install serve
 User shall install module serve for client
