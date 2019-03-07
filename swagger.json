@@ -1,0 +1,297 @@
+{
+	"basePath": "/",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {
+		"CampaignOption": {
+			"properties": {
+				"id": {
+					"type": "number",
+					"format": "double"
+				},
+				"optionDesc": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"id",
+				"optionDesc"
+			],
+			"type": "object"
+		},
+		"Campaign": {
+			"properties": {
+				"_id": {
+					"type": "string",
+					"x-nullable": true
+				},
+				"campaignDesc": {
+					"type": "string"
+				},
+				"campaignOptions": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CampaignOption"
+					}
+				},
+				"campaignStartDate": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"campaignEndDate": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"createDate": {
+					"type": "string",
+					"format": "date-time",
+					"x-nullable": true
+				}
+			},
+			"required": [
+				"campaignDesc",
+				"campaignOptions",
+				"campaignStartDate",
+				"campaignEndDate"
+			],
+			"type": "object"
+		},
+		"Vote": {
+			"properties": {
+				"hkId": {
+					"type": "string"
+				},
+				"campaignId": {
+					"type": "string"
+				},
+				"campaignOptionId": {
+					"type": "number",
+					"format": "double"
+				},
+				"createDate": {
+					"type": "string",
+					"format": "date-time",
+					"x-nullable": true
+				}
+			},
+			"required": [
+				"hkId",
+				"campaignId",
+				"campaignOptionId"
+			],
+			"type": "object"
+		},
+		"CompaignResult": {
+			"properties": {
+				"optionId": {
+					"type": "number",
+					"format": "double"
+				},
+				"count": {
+					"type": "number",
+					"format": "double"
+				}
+			},
+			"required": [
+				"optionId",
+				"count"
+			],
+			"type": "object"
+		}
+	},
+	"info": {
+		"title": "ts-express",
+		"version": "1.0.0",
+		"description": "Express API with Typescript",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"paths": {
+		"/Votes/{campaignId}": {
+			"get": {
+				"operationId": "GetVote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Campaign"
+						}
+					}
+				},
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "campaignId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"delete": {
+				"operationId": "RemoveCampaign",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/Campaign"
+						}
+					}
+				},
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "campaignId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateVoting",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Vote"
+						}
+					}
+				},
+				"description": "User creates a vote",
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "campaignId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "body",
+						"name": "requestBody",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Vote"
+						}
+					}
+				]
+			}
+		},
+		"/Votes": {
+			"get": {
+				"operationId": "GetAllVote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Campaign"
+							}
+						}
+					}
+				},
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateCampaign",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"201": {
+						"description": "Created",
+						"schema": {
+							"$ref": "#/definitions/Campaign"
+						}
+					}
+				},
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "requestBody",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Campaign"
+						}
+					}
+				]
+			}
+		},
+		"/Votes/summary/{campaignId}": {
+			"get": {
+				"operationId": "GetSummary",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/CompaignResult"
+							}
+						}
+					}
+				},
+				"description": "Get Specific Campaign Summary",
+				"tags": [
+					"Votes"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "campaignId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"tags": [
+		{
+			"name": "Votes",
+			"description": "Operation about votes"
+		}
+	]
+}

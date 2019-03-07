@@ -1,5 +1,12 @@
-### React-Express-Typescript ###
+# React-Express-Typescript ###
 
+## Run With Docker
+After clone the project from git, just run
+```sh
+$ docker-compose up
+```
+
+## Run Without Docker
 ### 1) Installation
 For Express API Installaton...
 ```sh
@@ -32,13 +39,19 @@ For Client
 $ yarn client-run
 ```
 
+## Swagger
+Feel free to use online swagger viewer or simply use VS Code, see API design with `swagger.json`. If you want to view the updated one, run the following command, the updated swagger file will be generated in `/swagger` folder:
+```sh
+$ yarn swagger
+```
+
+## Postman
+For using api easily, a postman collection is provided as `TS-Express-Vote-Campaign.postman_collection.json`
 
 
-# Reviews
-### Finish Part
-
-### To Be Complete Part
+### To Be Complete 
 1. Unit Test
-2. Dockerlize server, client and mongoDB
+2. ~~Dockerlize server, client and mongoDB~~
 3. Explaination impletement for high traffic
-4. Display the most ended campaign
+4. ~~Display the most ended campaign~~
+5. Use eslint to standardlize code style
