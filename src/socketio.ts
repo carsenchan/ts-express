@@ -13,11 +13,12 @@ const socketHandler = (io: Server):void=>{
     console.log(`There is a client connected: ${socket.id}`);
 
     socket.on(event.SUBSCRIBE, (campaignId: string)=>{
+      clearInterval(interval);
       console.log(campaignId);
       interval = setInterval(()=>{
         services.getSummary(campaignId)
         .then(data=>{
-          namespace.emit(`${event.SUBSCRIBE}-${campaignId}`, {...data});
+          namespace.emit(`${event.SUBSCRIBE}`, {...data});
         })
       }, 2000);
     });

@@ -5,7 +5,7 @@ export default class CampaignList extends Component {
   render() {
     const {campaigns} = this.props;
     return (
-      <div>
+      <div className="all-list">
         <div className="list-header all-list-item">
           <div className="list-header-desc">Campaign</div>
           <div className="list-header-startdate">Start Date</div>

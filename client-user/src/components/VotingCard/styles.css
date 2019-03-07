@@ -1,0 +1,17 @@
+.main-voting-card{
+  border: 2px solid lightsalmon
+}
+
+.main-card-startdate{
+  font-size: 0.8rem;
+  color:gray;
+}
+
+.main-card-enddate{
+  font-size: 0.8rem;
+  color:gray;
+}
+
+li {
+  text-align: left
+}

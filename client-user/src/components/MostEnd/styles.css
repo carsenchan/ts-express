@@ -1,5 +1,4 @@
 .most-end{
-  background-color: lightskyblue;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+  border: 2px solid lightskyblue;
+  margin: 5px;
 }

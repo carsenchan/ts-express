@@ -1,11 +1,17 @@
 .all-list-item{
   display: grid;
-  grid-template-columns: 55% 15% 15% 15%
+  grid-template-columns: 55% 15% 15% 15%;
+  
 }
 
 .item-desc{
-  text-align: left
+  text-align: left;
+  margin: 5px;
 }
 .list-header{
   font-weight: bolder;
+}
+
+.all-list{
+  border: 2px solid lightgreen
 }

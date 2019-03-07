@@ -53,9 +53,6 @@ class App extends Component {
             
           }
         });
-
-
-
         this.setState({endedCampaigns: ended, activedCampaigns: actived, defaultCampaign: defaultCamp});
       }
       
@@ -67,7 +64,7 @@ class App extends Component {
     return (
       <div className="App">
         <mCompo.TopArea defaultCampaign={defaultCampaign} activedCampaigns={activedCampaigns} updateDefault={this.updateDefault} updateVotedList={this.updateVotedList} votedCampaigns={votedCampaigns}/>
-        <mCompo.MostEnd campaigns={votingCampaigns}/>
+        <mCompo.MostEnd campaigns={endedCampaigns}/>
         <mCompo.VotingList campaigns={votingCampaigns}/>
       </div>
     );

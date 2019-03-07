@@ -5,6 +5,7 @@ import moment from 'moment';
 import socketio from 'socket.io-client';
 import helpers from '../../helpers';
 import idValidator from './IDInput';
+import './styles.css';
 
 const socketio_URL =  'http://localhost:6001/votes';
 const socket_EVENT = 'SUBSCRIBE';
@@ -31,8 +32,6 @@ export default class VotingCard extends Component {
   }
 
   toggle = ()=>{
-
-
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
@@ -60,13 +59,12 @@ export default class VotingCard extends Component {
     console.log("Listen Event", campaignId)
     if(socket){
       this.state.socket.emit(socket_EVENT, campaignId);
-      this.state.socket.on(`${socket_EVENT}-${campaignId}`, this.socketDataHandler);
+      this.state.socket.on(`${socket_EVENT}`, this.socketDataHandler);
     }
     
   }
 
   socketDataHandler = (data)=>{
-    //console.log(data);
     const d1 = Object.keys(data).map((key)=>data[key])
 
     if(d1.length>0){
@@ -96,11 +94,6 @@ export default class VotingCard extends Component {
 
     }
   }
-
-  handleSummary = (summary)=>{
-    console.log(summary);
-  }
-
 
   componentDidUpdate(prevProps, prevState){
 
@@ -179,18 +172,18 @@ export default class VotingCard extends Component {
     return (
        <div>
         {
-           campaign.campaignDesc ? <Card>
+           campaign.campaignDesc ? <Card className='main-voting-card'>
            <CardBody>
              <CardTitle>{campaign.campaignDesc}</CardTitle>
-             <CardTitle>{`Start Date: ${moment(campaign.campaignStartDate).format('YYYY/MM/DD')}`}</CardTitle>
-             <CardTitle>{`End Date: ${moment(campaign.campaignEndDate).format('YYYY/MM/DD')}`}</CardTitle>
+             <div className="main-card-startdate">{`Start Date: ${moment(campaign.campaignStartDate).format('YYYY/MM/DD')}`}</div>
+             <div className="main-card-enddate">{`End Date: ${moment(campaign.campaignEndDate).format('YYYY/MM/DD')}`}</div>
              <ul>
                {
                   campaign.campaignOptions.map((option)=>{
                     const opt = summary.find(element=>{return element.optionId === `${option.id}`});
 
                     const count = opt ? opt.count : 0;
-                    return(<li key={option.id}>{`${option.id}. ${option.optionDesc} Vote:${count}`}</li>)})
+                    return(<li key={option.id}>{`${option.id}. ${option.optionDesc} - Vote:${count}`}</li>)})
                }
              </ul>
              <Button color="primary" onClick={this.toggle}>Vote</Button>

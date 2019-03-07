@@ -16,7 +16,6 @@ export default class TopArea extends React.PureComponent {
 
   render() {
     const {defaultCampaign, activedCampaigns, updateVotedList} = this.props;
-    console.log(this.state);
     return (
       <div className='top-area'>
         <VotingCard campaign={defaultCampaign} updateVotedList={updateVotedList}/>
