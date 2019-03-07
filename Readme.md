@@ -1,5 +1,9 @@
 # React-Express-Typescript ###
 
+Back-end: Node.js; Express.js; Socket.io; Typescript; tsoa  
+Front-end: React.js; Reactstrap;  
+[WakaTime link about this project](https://wakatime.com/@Carsen/projects/lcgwnuiozy?start=2019-03-02&end=2019-03-08)
+
 ## Run With Docker
 After clone the project from git, just run
 ```sh
