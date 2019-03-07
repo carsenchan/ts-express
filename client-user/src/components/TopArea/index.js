@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import ActiveCards from '../ActiveCard';
 import VotingCard from '../VotingCard';

@@ -16,7 +16,7 @@ const idValidator = (inputStr) =>{
   inputStr = inputStr.toUpperCase();
 
   let inputArr = inputStr.split('');
-  if(inputArr.length == 8) inputArr.unshift('-');
+  if(inputArr.length === 8) inputArr.unshift('-');
 
   if(inputArr.map((elem, index)=>(characterValue[elem]%REMAINDER * (inputArr.length - index)) % REMAINDER).reduce((accumulator, current)=>accumulator+current) % REMAINDER === 0){
     return true;

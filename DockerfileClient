@@ -1,0 +1,11 @@
+FROM node:latest
+
+WORKDIR /usr/src/ts-express
+
+COPY client-user/package*.json ./client-user
+
+RUN yarn
+RUN yarn global add serve
+COPY . .
+
+CMD ["yarn", "client-start"]

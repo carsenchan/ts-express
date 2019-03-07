@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Modal, ModalHeader, 
-  ModalBody, ModalFooter, InputGroup, Input , InputGroupAddon, FormGroup, Label} from 'reactstrap';
+import { Card, CardBody, CardTitle,  Button, Modal, ModalHeader, 
+  ModalFooter, InputGroup, Input , InputGroupAddon, FormGroup, Label} from 'reactstrap';
 import moment from 'moment';
 import socketio from 'socket.io-client';
 import helpers from '../../helpers';

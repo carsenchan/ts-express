@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import helper, {Campaign} from '../../helpers';
+import helper from '../../helpers';
 
 export default class ListItem extends Component {
 

@@ -2,16 +2,15 @@ import axios from 'axios';
 
 const domain = 'http://localhost:6001/votes'
 
-export const hkidCheck = (inputId:string): Boolean =>{
-
-}
-
 export interface Vote {
   hkId: string,
   campaignId: string,
   campaignOptionId: number
 }
-
+interface CampaignOption {
+  id: number,
+  optionDesc: string
+}
 export interface Campaign {
   _id?: string,
   campaignDesc: string,
@@ -20,10 +19,7 @@ export interface Campaign {
   campaignEndDate: Date,
   createDate?: Date
 }
-interface CampaignOption {
-  id: number,
-  optionDesc: string
-}
+
 
 export const getAllCampaign = ()=>{
   return axios.get(domain)
@@ -69,4 +65,4 @@ export const createVoting = (campaignId:string, vote:Vote)=>{
 //   .catch(error=>console.log(error))
 // }
 
-export default {hkidCheck, getAllCampaign, getCampaignById, getCampaignSummary, createVoting};
+export default { getAllCampaign, getCampaignById, getCampaignSummary, createVoting};

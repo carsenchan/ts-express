@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card } from 'reactstrap';
 import moment from 'moment';
 
 import './styles.css';
@@ -10,9 +10,6 @@ export default class ActiveCard extends Component {
 
   }
 
-  componentDidUpdate(prevProps, prevState){
-
-  }
 
   render() {
     const {campaigns} = this.props;
@@ -26,7 +23,7 @@ export default class ActiveCard extends Component {
 }
 
 const SimpleCard = (props)=>{
-  const {campaign, isActiveId, defaultCampaign} = props;
+  const {campaign, defaultCampaign} = props;
   return (<div><Card onClick={()=>props.onClick(campaign)} className={defaultCampaign._id === campaign._id? "card simple-active-item item-active": "card simple-active-item"}>
     <div className="simple-card-desc">{campaign.campaignDesc}</div>
     <div className="simple-card-startdate">{`Start Date: ${moment(campaign.campaignStartDate).format('YYYY/MM/DD')}`}</div>

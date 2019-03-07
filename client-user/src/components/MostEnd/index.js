@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardText, CardBody, CardTitle, CardSubtitle, Button, Modal, ModalHeader, 
-  ModalBody, ModalFooter, InputGroup, Input , InputGroupAddon, FormGroup, Label} from 'reactstrap';
+import { Card, CardBody, CardSubtitle} from 'reactstrap';
 import './styles.css';
 import helper from '../../helpers'
 
