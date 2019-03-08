@@ -14,7 +14,7 @@ export default class ActiveCard extends Component {
   render() {
     const {campaigns} = this.props;
     return (
-      <div>
+      <div className="active-list">
         Active List
         { campaigns? campaigns.map(campaign=><SimpleCard key={campaign._id} campaign={campaign} onClick={this.props.updateDefault} defaultCampaign={this.props.defaultCampaign}/> ): <div/>}
       </div>

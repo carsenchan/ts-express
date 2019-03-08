@@ -26,17 +26,18 @@ export default class CampaignList extends React.PureComponent {
       default:
         return newCampaigns.sort( (elemA, elemB)=>{
           if(sortOrder === 'desc'){
-            return elemB.campaignStartDate-elemA.campaignStartDate;
+            return new Date(elemB.campaignStartDate)-new Date(elemA.campaignStartDate);
           }else{
-            return elemA.campaignStartDate-elemB.campaignStartDate;
+            return new Date(elemA.campaignStartDate)-new Date(elemB.campaignStartDate);
           }
         })
       case 'endDate':
         return newCampaigns.sort( (elemA, elemB)=>{
+          console.log(typeof elemA.campaignEndDate);
           if(sortOrder === 'desc'){
-            return elemB.campaignEndDate-elemA.campaignEndDate;
+            return new Date(elemB.campaignEndDate)- new Date(elemA.campaignEndDate);
           }else{
-            return elemA.campaignEndDate-elemB.campaignEndDate;
+            return new Date(elemA.campaignEndDate)-new Date(elemB.campaignEndDate);
           }
         })
 
@@ -101,7 +102,7 @@ export default class CampaignList extends React.PureComponent {
               <RadioOption name='sortOrder' value="asc" text="Ascending order" onChange={this.handleSortOrderRadio} currentValue={sortOrder}/>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={this.handleSubmitSort}>Cancel</Button>
+            <Button color="primary" onClick={this.handleSubmitSort}>Close</Button>
           </ModalFooter>
         </Modal>
       </div>
@@ -114,7 +115,7 @@ const RadioOption = (props)=>{
   return (<FormGroup check>
     <Label check>
       <input type="radio" name={name} value={value} onChange={onChange} checked={value===currentValue}/>
-      {text}
+      {` `}{text}
     </Label>
   </FormGroup>
   )
