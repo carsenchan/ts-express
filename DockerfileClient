@@ -1,10 +1,12 @@
 FROM node:latest
 
-WORKDIR /usr/src/ts-express
+WORKDIR /usr/src/ts-express/client-user
 
-COPY client-user/package*.json ./client-user
+COPY client-user/package*.json ./
 
 RUN yarn
+
+RUN yarn global add typescript
 
 COPY . .
 
