@@ -174,7 +174,7 @@ export default class VotingCard extends Component {
              <ul>
                {
                   campaign.campaignOptions.map((option)=>{
-                    const opt = summary.find(element=>{return element.optionId === `${option.id}`});
+                    const opt = summary.find(element=>{return element.cId===campaign._id && element.optionId === `${option.id}`});
 
                     const count = opt ? opt.count : 0;
                     return(<li key={option.id}>{`${option.id}. ${option.optionDesc} - Vote:${count}`}</li>)})
