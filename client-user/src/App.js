@@ -28,11 +28,25 @@ class App extends Component {
     this.setState({defaultCampaign: campaign});
   }
 
+  getItemCount = async (item)=>{
+    let newItem = Object.assign({}, item);
+    let campaignSummary = await helper.getCampaignSummary(item._id);
+    campaignSummary = campaignSummary.data;
+    let total = 0;
+    if(campaignSummary.length > 0){
+      total= campaignSummary.map(elem=>elem.count).reduce((partial_sum, a) => partial_sum + a);
+    }
+    newItem.total = total;
+    return newItem;
+  }
+
   componentDidMount(){
     helper.getAllCampaign()
     .then(data=>{return data.data})
     .then((campaigns: Campaign[])=>{
-      this.setState({votingCampaigns: campaigns})
+
+      Promise.all(campaigns.map((item)=> {return this.getItemCount(item)}))
+      .then((data)=>this.setState({votingCampaigns: data}))
 
       if(campaigns.length>0){
         let ended = [];

@@ -1,4 +1,8 @@
 .top-area{
   display: grid;
   grid-template-columns: 70% auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid lightsalmon;
+  padding: 5px;
 }

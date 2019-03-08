@@ -28,8 +28,8 @@ export default class ListItem extends Component {
     return (
       <div className="all-list-item">
         <div className="item-desc">{printItem.campaignDesc}</div>
-        <div className="item-startdate">{moment(printItem.campaignStartDate).format('YYYY/MM/DD')}</div>
         <div className="item-enddate">{moment(printItem.campaignEndDate).format('YYYY/MM/DD')}</div>
+        <div className="item-startdate">{moment(printItem.campaignStartDate).format('YYYY/MM/DD')}</div>
         <div className="item-total-vote">{printItem.total}</div>
       </div>
     )

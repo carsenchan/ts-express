@@ -65,7 +65,6 @@ export default class VotingCard extends Component {
   }
 
   socketDataHandler = (data)=>{
-    console.log(data);
     const d1 = Object.keys(data).map((key)=>data[key])
 
     if(d1.length>0){
@@ -164,11 +163,11 @@ export default class VotingCard extends Component {
     const {campaign} = this.props;
     const {summary} = this.state;
     return (
-       <div>
+       <div className='main-voting-card'>
         {
-           campaign.campaignDesc ? <Card className='main-voting-card'>
+           campaign.campaignDesc ? <Card >
            <CardBody>
-             <CardTitle>{campaign.campaignDesc}</CardTitle>
+             <CardTitle className="main-card-desc">{campaign.campaignDesc}</CardTitle>
              <div className="main-card-startdate">{`Start Date: ${moment(campaign.campaignStartDate).format('YYYY/MM/DD')}`}</div>
              <div className="main-card-enddate">{`End Date: ${moment(campaign.campaignEndDate).format('YYYY/MM/DD')}`}</div>
              <ul>
