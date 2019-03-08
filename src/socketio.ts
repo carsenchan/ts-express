@@ -9,12 +9,18 @@ const socketHandler = (io: Server):void=>{
   const namespace = io.of('/votes')
   .on('connection', (socket)=>{
 
-    let interval:NodeJS.Timer;
+    let interval:any = undefined;
+    let currentCampaignId:any = undefined;
     console.log(`There is a client connected: ${socket.id}`);
 
     socket.on(event.SUBSCRIBE, (campaignId: string)=>{
-      clearInterval(interval);
       console.log(campaignId);
+      if(interval || campaignId !== currentCampaignId){
+        clearInterval(interval);
+      }
+
+      
+      
       interval = setInterval(()=>{
         services.getSummary(campaignId)
         .then(data=>{

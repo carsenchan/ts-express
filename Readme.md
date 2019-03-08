@@ -4,6 +4,13 @@ Back-end: Node.js; Express.js; Socket.io; Typescript; tsoa
 Front-end: React.js; Reactstrap;  
 [WakaTime link about this project](https://wakatime.com/@Carsen/projects/lcgwnuiozy?start=2019-03-02&end=2019-03-08)
 
+## Run
+If the appplication is able to test, following links should be reached:
+1. http://localhost:3000 - Client-side web page
+2. http://localhost:6001 - API Server with port 6001
+3. User could connect to mongoDB with mongodb://localhost:27017/voting
+
+
 ## Run With Docker
 After clone the project from git, just run
 ```sh

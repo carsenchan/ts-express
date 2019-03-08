@@ -65,6 +65,7 @@ export default class VotingCard extends Component {
   }
 
   socketDataHandler = (data)=>{
+    console.log(data);
     const d1 = Object.keys(data).map((key)=>data[key])
 
     if(d1.length>0){
@@ -77,12 +78,9 @@ export default class VotingCard extends Component {
             const count = elem.count;
             newSummary.push({cId, optionId, count});
           }
-            
-        });
-        
+        }); 
         this.setState({summary: newSummary});
       }
-     
     }
   }
 
@@ -90,7 +88,7 @@ export default class VotingCard extends Component {
     console.log("Remove Event", campaignId)
     if(socket && campaignId){
       //this.state.socket.removeListener(`${socket_EVENT}-${campaignId}`, ());
-      this.state.socket.removeListener(`${socket_EVENT}-${campaignId}`, this.socketDataHandler);
+      this.state.socket.removeListener(`${socket_EVENT}`, this.socketDataHandler);
 
     }
   }
@@ -98,16 +96,15 @@ export default class VotingCard extends Component {
   componentDidUpdate(prevProps, prevState){
 
     if("_id" in this.props.campaign && (this.props.campaign._id !== prevProps.campaign._id)){
+      if(this.state.socket){
+        this.state.socket.close();
+      }
       this.initSocket()
       this.socketListenCompaignSummary(this.state.socket, this.props.campaign._id);
       this.socketRemoveCompaignSummary(this.state.socket, prevProps.campaign._id);
       //this.state.socket.removeAllListeners([`${socket_EVENT}-${prevProps.campaign._id}`]);
     } 
     //this.initSocket();
-  }
-
-  componentWillUnmount(){
-    
   }
 
   // Update Redio Button Change
