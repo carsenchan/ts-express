@@ -79,7 +79,8 @@ export default class CampaignList extends React.PureComponent {
     const {campaigns, sortBy, sortOrder} = this.state;
     return (
       <div className="all-list">
-        <div><Button color='primary' size='sm' onClick={this.toggle}>Sort</Button></div>
+        <div style={{textAlign:"right"}}><Button color='primary' size='sm' onClick={this.toggle}>Sort</Button></div>
+        <hr/>
         <div className="list-header all-list-item">
           <div className="list-header-desc">Campaign</div>
           <div className="list-header-enddate">End Date</div>

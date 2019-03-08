@@ -13,5 +13,7 @@
 }
 
 .all-list{
-  border: 2px solid lightgreen
+  border: 2px solid lightgreen;
+  height: 30vh;
+  overflow-y: scroll;
 }
