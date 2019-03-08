@@ -14,6 +14,7 @@ If the appplication is able to test, following links should be reached:
 ## Run With Docker
 After clone the project from git, just run
 ```sh
+$ docker-compose build
 $ docker-compose up
 ```
 
