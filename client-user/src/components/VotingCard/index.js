@@ -94,7 +94,6 @@ export default class VotingCard extends Component {
   }
 
   componentDidUpdate(prevProps, prevState){
-
     if("_id" in this.props.campaign && (this.props.campaign._id !== prevProps.campaign._id)){
       if(this.state.socket){
         this.state.socket.close();
@@ -102,9 +101,7 @@ export default class VotingCard extends Component {
       this.initSocket()
       this.socketListenCompaignSummary(this.state.socket, this.props.campaign._id);
       this.socketRemoveCompaignSummary(this.state.socket, prevProps.campaign._id);
-      //this.state.socket.removeAllListeners([`${socket_EVENT}-${prevProps.campaign._id}`]);
     } 
-    //this.initSocket();
   }
 
   // Update Redio Button Change
